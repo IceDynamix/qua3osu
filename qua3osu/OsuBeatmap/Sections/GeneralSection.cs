@@ -12,14 +12,14 @@ namespace qua3osu.OsuBeatmap.Sections
         public string SampleSet;
         public double StackLeniency = 0.7;
         public int Mode = 3;
-        public int LetterBoxInBreaks = 0;
+        public int LetterboxInBreaks = 0;
         public int SpecialStyle = 0;
         public int WidescreenStoryboard = 1;
 
         public GeneralSection(Qua qua, Arguments args)
         {
             AudioFilename = qua.AudioFile;
-            PreviewTime = qua.SongPreviewTime;
+            PreviewTime = qua.SongPreviewTime + (args.DontApplyOffset ? 0 : OsuBeatmap.QUAVER_TO_OSU_OFFSET);
             SampleSet = args.SampleSet;
         }
 
@@ -36,7 +36,7 @@ namespace qua3osu.OsuBeatmap.Sections
             lines.AppendLine("SampleSet: " + SampleSet);
             lines.AppendLine("StackLeniency: " + StackLeniency);
             lines.AppendLine("Mode: " + Mode);
-            lines.AppendLine("LetterBoxInBreaks: " + LetterBoxInBreaks);
+            lines.AppendLine("LetterboxInBreaks: " + LetterboxInBreaks);
             lines.AppendLine("SpecialStyle: " + SpecialStyle);
             lines.AppendLine("WidescreenStoryboard: " + WidescreenStoryboard);
             return lines.ToString();

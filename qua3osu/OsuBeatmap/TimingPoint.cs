@@ -14,19 +14,19 @@ namespace qua3osu.OsuBeatmap
         public int Uninherited = 0;
         public int Kiai = 0;
 
-        public TimingPoint(TimingPointInfo timingPoint, int volume)
+        public TimingPoint(TimingPointInfo timingPoint, int volume, bool dontUseOffset)
         {
-            Time = (int)Math.Round(timingPoint.StartTime);
-            Uninherited = 0;
+            Time = (int)Math.Round(timingPoint.StartTime) + (dontUseOffset ? 0 : OsuBeatmap.QUAVER_TO_OSU_OFFSET);
+            Uninherited = 1;
             // osu! can't handle 0 BPM, so it's replaced with a very low BPM value instead (0.000006 BPM).
             BeatLength = timingPoint.Bpm <= 0 ? -10e10 : timingPoint.MillisecondsPerBeat;
             Volume = volume;
         }
 
-        public TimingPoint(SliderVelocityInfo scrollVelocity, int volume)
+        public TimingPoint(SliderVelocityInfo scrollVelocity, int volume, bool dontUseOffset)
         {
-            Time = (int)Math.Round(scrollVelocity.StartTime);
-            Uninherited = 1;
+            Time = (int)Math.Round(scrollVelocity.StartTime) + (dontUseOffset ? 0 : OsuBeatmap.QUAVER_TO_OSU_OFFSET);
+            Uninherited = 0;
             Meter = 0;
             // osu! can't handle 0x SV, so it's replaced with a very low value instead (0.00000001x)
             // It clamps all SV values between 0.01x and 10x, so putting -10e10 instead of -10e4 doesn't really

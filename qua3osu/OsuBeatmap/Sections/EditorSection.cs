@@ -21,7 +21,8 @@ namespace qua3osu.OsuBeatmap.Sections
         {
             var lines = new StringBuilder();
             lines.AppendLine(FormatTitle());
-            lines.AppendLine("Bookmarks: " + Bookmarks);
+            if (Bookmarks != "")
+                lines.AppendLine("Bookmarks: " + Bookmarks);
             lines.AppendLine("DistanceSpacing: " + DistanceSpacing);
             lines.AppendLine("BeatDivisor: " + BeatDivisor);
             lines.AppendLine("GridSize: " + GridSize);

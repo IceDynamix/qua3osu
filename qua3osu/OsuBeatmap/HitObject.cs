@@ -12,8 +12,9 @@ namespace qua3osu.OsuBeatmap
         public int HitSounds = 0;
         public int EndTime = 0;
 
-        public HitObject(HitObjectInfo hitObject, int keyCount)
+        public HitObject(HitObjectInfo hitObject, int keyCount, bool dontUseOffset)
         {
+            Time = hitObject.StartTime + (dontUseOffset ? 0 : OsuBeatmap.QUAVER_TO_OSU_OFFSET);
             XPosition = 512 * hitObject.Lane / keyCount - 64;
             Type = hitObject.IsLongNote ? 1<<7 : 1<<0;
             EndTime = hitObject.EndTime;
@@ -23,9 +24,9 @@ namespace qua3osu.OsuBeatmap
         public override string ToString()
         {
             if (Type == 1<<7)
-                return $"{XPosition},{YPosition},{Time},{Type},{HitSounds},{EndTime}:0:0:0:0";
+                return $"{XPosition},{YPosition},{Time},{Type},{HitSounds},{EndTime}:0:0:0:0:";
             else
-                return $"{XPosition},{YPosition},{Time},{Type},{HitSounds},0:0:0:0";
+                return $"{XPosition},{YPosition},{Time},{Type},{HitSounds},0:0:0:0:";
         }
     }
 }

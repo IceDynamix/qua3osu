@@ -17,14 +17,14 @@ namespace qua3osu.OsuBeatmap.Sections
             CircleSize = qua.GetKeyCount();
         }
 
-        public override string SectionTitle { get; } = "Diffculty";
+        public override string SectionTitle { get; } = "Difficulty";
 
         public override string ToString()
         {
             // Difficulty doesn't have a space after the colon
             var lines = new StringBuilder();
             lines.AppendLine(FormatTitle());
-            lines.AppendLine("HpDrainRate:" + HpDrainRate);
+            lines.AppendLine("HPDrainRate:" + HpDrainRate);
             lines.AppendLine("CircleSize:" + CircleSize);
             lines.AppendLine("OverallDifficulty:" + OverallDifficulty);
             lines.AppendLine("ApproachRate:" + ApproachRate);

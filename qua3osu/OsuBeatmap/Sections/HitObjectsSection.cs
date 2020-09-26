@@ -12,7 +12,7 @@ namespace qua3osu.OsuBeatmap.Sections
         public HitObjectsSection(Qua qua, Arguments args)
         {
             HitObjects = qua.HitObjects.Select(
-                hitObject => new HitObject(hitObject, qua.GetKeyCount())
+                hitObject => new HitObject(hitObject, qua.GetKeyCount(), args.DontApplyOffset)
             ).ToList();
         }
 

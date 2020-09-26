@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using System.Text;
 using qua3osu.OsuBeatmap.Sections;
 using Quaver.API.Maps;
@@ -9,6 +7,7 @@ namespace qua3osu.OsuBeatmap
 {
     public class OsuBeatmap
     {
+        public const int QUAVER_TO_OSU_OFFSET = -23;
         public GeneralSection GeneralSection;
         public EditorSection EditorSection;
         public MetadataSection MetadataSection;
@@ -42,7 +41,7 @@ namespace qua3osu.OsuBeatmap
                 TimingPointsSection,
                 HitObjectsSection,
             };
-            
+
             var lines = new StringBuilder();
             lines.AppendLine("osu file format v14\n");
             sections.ForEach(section => lines.AppendLine(section.ToString()));

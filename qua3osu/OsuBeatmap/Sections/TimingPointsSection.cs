@@ -12,12 +12,12 @@ namespace qua3osu.OsuBeatmap.Sections
         public TimingPointsSection(Qua qua, Arguments args)
         {
             TimingPoints = qua.TimingPoints.Select(
-                timingPoint => new TimingPoint(timingPoint, args.Volume)
+                timingPoint => new TimingPoint(timingPoint, args.Volume, args.DontApplyOffset)
             ).ToList();
 
             TimingPoints.AddRange(
                 qua.SliderVelocities.Select(
-                    sv => new TimingPoint(sv, args.Volume)
+                    sv => new TimingPoint(sv, args.Volume, args.DontApplyOffset)
                 )
             );
 
