@@ -1,9 +1,9 @@
 ﻿using System.Text;
 using Quaver.API.Maps;
 
-namespace qua3osu.OsuBeatmap.Sections
+namespace qua3osu.Osu.BeatmapSections
 {
-    public class EditorSection : Section
+    public class EditorSection : BeatmapSection
     {
         public string Bookmarks = "";
         public double DistanceSpacing = 1.5;

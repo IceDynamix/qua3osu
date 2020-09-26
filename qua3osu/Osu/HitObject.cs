@@ -14,7 +14,7 @@ namespace qua3osu.OsuBeatmap
 
         public HitObject(HitObjectInfo hitObject, int keyCount, bool dontUseOffset)
         {
-            Time = hitObject.StartTime + (dontUseOffset ? 0 : OsuBeatmap.QUAVER_TO_OSU_OFFSET);
+            Time = hitObject.StartTime + (dontUseOffset ? 0 : Osu.OsuBeatmap.QUAVER_TO_OSU_OFFSET);
             XPosition = 512 * hitObject.Lane / keyCount - 64;
             Type = hitObject.IsLongNote ? 1<<7 : 1<<0;
             EndTime = hitObject.EndTime;

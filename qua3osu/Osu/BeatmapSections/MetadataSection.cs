@@ -1,9 +1,9 @@
 ﻿using System.Text;
 using Quaver.API.Maps;
 
-namespace qua3osu.OsuBeatmap.Sections
+namespace qua3osu.Osu.BeatmapSections
 {
-    public class MetadataSection : Section
+    public class MetadataSection : BeatmapSection
     {
         public string Title;
         public string TitleUnicode;
@@ -13,7 +13,7 @@ namespace qua3osu.OsuBeatmap.Sections
         public string Version;
         public string Source;
         public string Tags;
-        
+
         public int BeatmapID = 0;
         public int BeatmapSetID = -1;
 

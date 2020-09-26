@@ -1,9 +1,9 @@
 ﻿using System.Text;
 using Quaver.API.Maps;
 
-namespace qua3osu.OsuBeatmap.Sections
+namespace qua3osu.Osu.BeatmapSections
 {
-    public class EventsSection : Section
+    public class EventsSection : BeatmapSection
     {
         public string BackgroundFile;
 

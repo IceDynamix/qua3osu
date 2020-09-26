@@ -1,6 +1,6 @@
-﻿namespace qua3osu.OsuBeatmap.Sections
+﻿namespace qua3osu.Osu.BeatmapSections
 {
-    public abstract class Section
+    public abstract class BeatmapSection
     {
         public abstract string SectionTitle { get; }
 

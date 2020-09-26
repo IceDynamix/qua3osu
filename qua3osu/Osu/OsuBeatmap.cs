@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-using qua3osu.OsuBeatmap.Sections;
+using qua3osu.Osu.BeatmapSections;
 using Quaver.API.Maps;
 
-namespace qua3osu.OsuBeatmap
+namespace qua3osu.Osu
 {
     public class OsuBeatmap
     {
@@ -31,7 +31,7 @@ namespace qua3osu.OsuBeatmap
 
         public override string ToString()
         {
-            var sections = new List<Section>
+            var sections = new List<BeatmapSection>
             {
                 GeneralSection,
                 EditorSection,

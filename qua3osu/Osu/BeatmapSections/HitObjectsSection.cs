@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using qua3osu.OsuBeatmap;
 using Quaver.API.Maps;
 
-namespace qua3osu.OsuBeatmap.Sections
+namespace qua3osu.Osu.BeatmapSections
 {
-    public class HitObjectsSection : Section
+    public class HitObjectsSection : BeatmapSection
     {
         public List<HitObject> HitObjects;
 

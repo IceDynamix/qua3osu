@@ -8,7 +8,7 @@ namespace qua3osu
         [Option('q', Default = false)]
         public bool Quiet { get; set; }
 
-        [Option('o', Default = "./output", HelpText = "Specifies the output directory")]
+        [Option('o', HelpText = "Specifies the output directory, uses original directory of .qp by default")]
         public string Output { get; set; }
 
         [Option('v', Default = 20, HelpText = "Hitsound volume for the entire map")]
