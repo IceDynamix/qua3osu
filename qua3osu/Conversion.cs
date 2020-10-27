@@ -11,43 +11,68 @@ namespace qua3osu
         {
             if (!File.Exists(mapsetPath) || Path.GetExtension(mapsetPath) != ".qp")
             {
-                Console.WriteLine("Invalid mapset file");
-                return;
+                throw new ArgumentException("Invalid file");
             }
 
             var outputDir = args.Output ?? Path.GetDirectoryName(mapsetPath);
             var folderName = Path.GetFileNameWithoutExtension(mapsetPath);
             var extractDir = Path.Join(outputDir, folderName);
 
-            ZipFile.ExtractToDirectory(mapsetPath, extractDir, true);
-            foreach (var file in Directory.EnumerateFiles(extractDir))
+            try
             {
-                switch (Path.GetExtension(file))
+                ZipFile.ExtractToDirectory(mapsetPath, extractDir, true);
+                foreach (var file in Directory.EnumerateFiles(extractDir))
                 {
-                    case ".qua":
-                        var map = new Osu.OsuBeatmap(Qua.Parse(file), args);
-                        File.WriteAllText(file, map.ToString());
-                        var osuPath = Path.Join(extractDir, Path.GetFileNameWithoutExtension(file) + ".osu");
-                        File.Move(file, osuPath, true);
-                        break;
-                    case ".png":
-                    case ".jpg":
-                    case ".mp3":
-                        break;
-                    default:
-                        File.Delete(file);
-                        break;
+                    switch (Path.GetExtension(file))
+                    {
+                        case ".qua":
+                            var qua = Qua.Parse(file);
+                            args.Print("Parsed qua", 3);
+
+                            var map = new Osu.OsuBeatmap(qua, args);
+                            args.Print("Converted qua to osu! map object", 3);
+
+                            File.WriteAllText(file, map.ToString());
+                            args.Print($"Written to file {file}", 3);
+
+                            var osuPath = Path.Join(extractDir, Path.GetFileNameWithoutExtension(file) + ".osu");
+                            File.Move(file, osuPath, true);
+                            args.Print($"Renamed file to {osuPath}", 3);
+
+                            break;
+                        case ".png":
+                        case ".jpg":
+                        case ".mp3":
+                            args.Print($"Kept file {file} in directory", 3);
+                            break;
+                        default:
+                            args.Print($"Removed file {file}", 3);
+                            File.Delete(file);
+                            break;
+                    }
                 }
+
+                var oszPath = extractDir + ".osz";
+                if (File.Exists(oszPath))
+                {
+                    args.Print($"Removed existing .osz", 3);
+                    File.Delete(oszPath);
+                }
+
+                ZipFile.CreateFromDirectory(extractDir, extractDir + ".osz");
+                args.Print($"Created new .osz", 3);
             }
-
-            var oszPath = extractDir + ".osz";
-            if (File.Exists(oszPath))
-                File.Delete(oszPath);
-            ZipFile.CreateFromDirectory(extractDir, extractDir + ".osz");
-
-            foreach (var file in Directory.EnumerateFiles(extractDir))
-                File.Delete(file);
-            Directory.Delete(extractDir);
+            catch (Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+            finally
+            {
+                foreach (var file in Directory.EnumerateFiles(extractDir))
+                    File.Delete(file);
+                Directory.Delete(extractDir);
+                args.Print($"Removed temporary conversion folder", 3);
+            }
         }
     }
 }
