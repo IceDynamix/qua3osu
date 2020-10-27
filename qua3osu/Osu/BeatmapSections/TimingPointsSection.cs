@@ -12,6 +12,13 @@ namespace qua3osu.Osu.BeatmapSections
 
         public TimingPointsSection(Qua qua, Arguments args)
         {
+            if (qua.BPMDoesNotAffectScrollVelocity)
+            {
+                qua.SortTimingPoints();
+                qua.SortSliderVelocities();
+                qua.DenormalizeSVs();
+            }
+            
             TimingPoints = qua.TimingPoints.Select(
                 timingPoint => new TimingPoint(timingPoint, args.Volume, args.DontApplyOffset)
             ).ToList();
