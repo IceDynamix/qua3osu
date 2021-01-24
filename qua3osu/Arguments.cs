@@ -16,10 +16,10 @@ namespace qua3osu
         public string Output { get; set; }
 
         [Option("od", Default = 8, HelpText = "Overall difficulty as a number between 0 and 10")]
-        public int OverallDifficulty { get; set; }
+        public double OverallDifficulty { get; set; }
 
         [Option("hp", Default = 8, HelpText = "HP drain as a number between 0 and 10")]
-        public int HpDrainRate { get; set; }
+        public double HpDrainRate { get; set; }
 
         [Option('v', "volume", Default = 20, HelpText = "Hitsound volume for the entire map")]
         public int Volume { get; set; }
@@ -53,12 +53,12 @@ namespace qua3osu
         public void Validate()
         {
             SampleSet = DrumSampleSet ? "Drum" : (NormalSampleset ? "Normal" : "Soft");
-            validateValue(OverallDifficulty, "OD", 0, 10);
-            validateValue(HpDrainRate, "HP", 0, 10);
-            validateValue(Volume, "Volume", 0, 100);
+            OverallDifficulty = ValidateValue(OverallDifficulty, "OD", 0f, 10f);
+            HpDrainRate = ValidateValue(HpDrainRate, "HP", 0f, 10f);
+            Volume = (int)ValidateValue(Volume, "Volume", 0, 100);
         }
 
-        private double validateValue(double value, string name, double min, double max)
+        private double ValidateValue(double value, string name, double min, double max)
         {
             if ((value > max || value < min) && Verbosity >= 1)
                 Console.WriteLine($"{name} was clamped between {min} and {max}");
