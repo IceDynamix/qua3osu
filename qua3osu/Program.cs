@@ -38,7 +38,8 @@ namespace qua3osu
 
             if (listOfQpFiles.Count == 0)
                 args.Print("No files found");
-            args.Print($"Found {listOfQpFiles.Count} mapsets to convert", 2);
+            else
+                args.Print($"Found {listOfQpFiles.Count} mapsets to convert", 2);
 
             foreach (var mapsetPath in listOfQpFiles)
             {

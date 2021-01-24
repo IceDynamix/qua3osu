@@ -16,7 +16,8 @@ namespace qua3osu.OsuBeatmap
 
         public TimingPoint(TimingPointInfo timingPoint, int volume, bool dontUseOffset)
         {
-            Time = (int)Math.Round(timingPoint.StartTime) + (dontUseOffset ? 0 : Osu.OsuBeatmap.QUAVER_TO_OSU_OFFSET);
+            var offset = dontUseOffset ? 0 : Osu.OsuBeatmap.QUAVER_TO_OSU_OFFSET;
+            Time = (int)Math.Round(timingPoint.StartTime) + offset;
             Uninherited = 1;
             // osu! can't handle 0 BPM, so it's replaced with a very low BPM value instead (0.000006 BPM).
             BeatLength = timingPoint.Bpm <= 0 ? -10e10 : timingPoint.MillisecondsPerBeat;

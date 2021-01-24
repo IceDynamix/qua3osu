@@ -5,12 +5,21 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+        <PublishTrimmed>true</PublishTrimmed>
+        <TrimMode>link</TrimMode>
+        <SuppressTrimAnalysisWarnings>false</SuppressTrimAnalysisWarnings>
+        <InvariantGlobalization>true</InvariantGlobalization>
+    </PropertyGroup>
+
     <ItemGroup>
-      <ProjectReference Include="..\Quaver.API\Quaver.API\Quaver.API.csproj" />
+        <ProjectReference Include="..\Quaver.API\Quaver.API\Quaver.API.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="CommandLineParser" Version="2.8.0" />
+        <PackageReference Include="CommandLineParser" Version="2.8.0" />
     </ItemGroup>
 
 </Project>
