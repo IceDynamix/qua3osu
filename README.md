@@ -4,6 +4,12 @@ This is a rewrite of [qua2osu](https://github.com/IceDynamix/qua2osu) in C#
 instead of Python. Using [Quaver.API](https://github.com/Quaver/Quaver.API)
 makes conversion a lot easier.
 
+## Run with Drag&Drop
+
+https://user-images.githubusercontent.com/22303902/140838272-28793396-ce55-42d4-a69f-f2f90f6187a5.mp4
+
+## Run through the command line
+
 Run the project with the `--help` flag to get everything you need. If you
 downloaded from releases, open up a command line and run `qua3osu.exe --help`.
 
