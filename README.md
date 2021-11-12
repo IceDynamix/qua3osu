@@ -4,6 +4,10 @@ This is a rewrite of [qua2osu](https://github.com/IceDynamix/qua2osu) in C#
 instead of Python. Using [Quaver.API](https://github.com/Quaver/Quaver.API)
 makes conversion a lot easier.
 
+## Download
+
+[Download here](https://github.com/IceDynamix/qua3osu/releases/tag/v1.0.1)
+
 ## Run with Drag&Drop
 
 https://user-images.githubusercontent.com/22303902/140838272-28793396-ce55-42d4-a69f-f2f90f6187a5.mp4
