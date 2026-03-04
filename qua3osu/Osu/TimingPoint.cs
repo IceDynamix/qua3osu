@@ -15,17 +15,18 @@ namespace qua3osu.Osu
 
         public TimingPoint(TimingPointInfo timingPoint, int volume, bool dontUseOffset)
         {
-            var offset = dontUseOffset ? 0 : Osu.OsuBeatmap.QUAVER_TO_OSU_OFFSET;
+            var offset = dontUseOffset ? 0 : OsuBeatmap.QUAVER_TO_OSU_OFFSET;
             Time = (int)Math.Round(timingPoint.StartTime) + offset;
             Uninherited = 1;
             // osu! can't handle 0 BPM, so it's replaced with a very low BPM value instead (0.000006 BPM).
-            BeatLength = timingPoint.Bpm <= 0 ? -10e10 : timingPoint.MillisecondsPerBeat;
+            BeatLength = timingPoint.Bpm <= 0 ? 10e10 : timingPoint.MillisecondsPerBeat;
             Volume = volume;
         }
 
         public TimingPoint(SliderVelocityInfo scrollVelocity, int volume, bool dontUseOffset)
         {
-            Time = (int)Math.Round(scrollVelocity.StartTime) + (dontUseOffset ? 0 : Osu.OsuBeatmap.QUAVER_TO_OSU_OFFSET);
+            var offset = dontUseOffset ? 0 : OsuBeatmap.QUAVER_TO_OSU_OFFSET;
+            Time = (int)Math.Round(scrollVelocity.StartTime) + offset;
             Uninherited = 0;
             Meter = 0;
             // osu! can't handle 0x SV, so it's replaced with a very low value instead (0.00000001x)
@@ -35,6 +36,7 @@ namespace qua3osu.Osu
             Volume = volume;
         }
 
-        public override string ToString() => $"{Time},{BeatLength},{Meter},{SampleSet},{SampleIndex},{Volume},{Uninherited},{Kiai}";
+        public override string ToString() =>
+            $"{Time},{BeatLength},{Meter},{SampleSet},{SampleIndex},{Volume},{Uninherited},{Kiai}";
     }
 }
