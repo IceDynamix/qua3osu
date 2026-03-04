@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using qua3osu.OsuBeatmap;
+﻿using System.Text;
 using Quaver.API.Maps;
 
 namespace qua3osu.Osu.BeatmapSections
@@ -19,20 +16,18 @@ namespace qua3osu.Osu.BeatmapSections
                 qua.DenormalizeSVs();
             }
             
-            TimingPoints = qua.TimingPoints.Select(
-                timingPoint => new TimingPoint(timingPoint, args.Volume, args.DontApplyOffset)
-            ).ToList();
+            TimingPoints = qua.TimingPoints
+                .Select(timingPoint => new TimingPoint(timingPoint, args.Volume, args.DontApplyOffset))
+                .ToList();
 
             TimingPoints.AddRange(
-                qua.SliderVelocities.Select(
-                    sv => new TimingPoint(sv, args.Volume, args.DontApplyOffset)
-                )
+                qua.SliderVelocities.Select(sv => new TimingPoint(sv, args.Volume, args.DontApplyOffset))
             );
 
             TimingPoints = TimingPoints.OrderBy(x => x.Time).ToList();
         }
 
-        public override string SectionTitle { get; } = "TimingPoints";
+        protected override string SectionTitle => "TimingPoints";
 
         public override string ToString()
         {

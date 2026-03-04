@@ -17,7 +17,7 @@ namespace qua3osu.Osu.BeatmapSections
             CircleSize = qua.GetKeyCount();
         }
 
-        public override string SectionTitle { get; } = "Difficulty";
+        protected override string SectionTitle { get; } = "Difficulty";
 
         public override string ToString()
         {

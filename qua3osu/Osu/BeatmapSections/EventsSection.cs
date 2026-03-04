@@ -12,7 +12,7 @@ namespace qua3osu.Osu.BeatmapSections
             BackgroundFile = qua.BackgroundFile;
         }
 
-        public override string SectionTitle { get; } = "Events";
+        protected override string SectionTitle { get; } = "Events";
 
         public override string ToString()
         {

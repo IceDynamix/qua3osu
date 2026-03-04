@@ -29,7 +29,7 @@ namespace qua3osu.Osu.BeatmapSections
             Tags = qua.Tags;
         }
 
-        public override string SectionTitle { get; } = "Metadata";
+        protected override string SectionTitle { get; } = "Metadata";
 
         public override string ToString()
         {

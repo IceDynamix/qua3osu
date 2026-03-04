@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using qua3osu.OsuBeatmap;
+﻿using System.Text;
 using Quaver.API.Maps;
 
 namespace qua3osu.Osu.BeatmapSections
@@ -12,12 +9,12 @@ namespace qua3osu.Osu.BeatmapSections
 
         public HitObjectsSection(Qua qua, Arguments args)
         {
-            HitObjects = qua.HitObjects.Select(
-                hitObject => new HitObject(hitObject, qua.GetKeyCount(), args.DontApplyOffset)
-            ).ToList();
+            HitObjects = qua.HitObjects
+                .Select(hitObject => new HitObject(hitObject, qua.GetKeyCount(), args.DontApplyOffset))
+                .ToList();
         }
 
-        public override string SectionTitle { get; } = "HitObjects";
+        protected override string SectionTitle { get; } = "HitObjects";
 
         public override string ToString()
         {

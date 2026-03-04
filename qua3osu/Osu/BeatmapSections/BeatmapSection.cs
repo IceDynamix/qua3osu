@@ -2,9 +2,9 @@
 {
     public abstract class BeatmapSection
     {
-        public abstract string SectionTitle { get; }
+        protected abstract string SectionTitle { get; }
 
-        public string FormatTitle() => $"[{SectionTitle}]";
+        protected string FormatTitle() => $"[{SectionTitle}]";
         public abstract override string ToString();
     }
 }

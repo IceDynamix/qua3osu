@@ -15,7 +15,7 @@ namespace qua3osu.Osu.BeatmapSections
         {
         }
 
-        public override string SectionTitle { get; } = "Editor";
+        protected override string SectionTitle { get; } = "Editor";
 
         public override string ToString()
         {

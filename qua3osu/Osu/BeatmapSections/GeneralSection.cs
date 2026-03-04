@@ -23,7 +23,7 @@ namespace qua3osu.Osu.BeatmapSections
             SampleSet = args.SampleSet;
         }
 
-        public override string SectionTitle { get; } = "General";
+        protected override string SectionTitle { get; } = "General";
 
         public override string ToString()
         {

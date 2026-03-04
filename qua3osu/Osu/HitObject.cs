@@ -1,7 +1,6 @@
-﻿using System;
-using Quaver.API.Maps.Structures;
+﻿using Quaver.API.Maps.Structures;
 
-namespace qua3osu.OsuBeatmap
+namespace qua3osu.Osu
 {
     public class HitObject
     {

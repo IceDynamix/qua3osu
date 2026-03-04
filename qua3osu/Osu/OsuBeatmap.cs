@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 using qua3osu.Osu.BeatmapSections;
 using Quaver.API.Maps;
 
