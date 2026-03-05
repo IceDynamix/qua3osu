@@ -1,55 +1,55 @@
 ﻿using System.Text;
 using CommandLine;
 
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+
 namespace qua3osu
 {
     public class Arguments
     {
         [Value(0, MetaName = "input-paths", Required = true,
             HelpText = "Path(s) to directories containing .qp files or direct .qp file path(s)")]
-        public IEnumerable<string> Paths { get; } = [];
+        public IEnumerable<string> Paths { get; set; } = [];
 
         [Option('o', "output", HelpText = "Specifies the output directory, uses original directory of .qp by default")]
-        public string? Output { get; }
+        public string? Output { get; set; }
 
         [Option("od", Default = 8, HelpText = "Overall difficulty as a number between 0 and 10")]
-        public double OverallDifficulty { get; private set; }
+        public double OverallDifficulty { get; set; }
 
         [Option("hp", Default = 8, HelpText = "HP drain as a number between 0 and 10")]
-        public double HpDrainRate { get; private set; }
+        public double HpDrainRate { get; set; }
 
         [Option('v', "volume", Default = 20, HelpText = "Hitsound volume for the entire map")]
         public int Volume { get; set; }
 
         [Option('c', "creator", HelpText = "Changes the creator username for all maps")]
-        public string? Creator { get; }
+        public string? Creator { get; set; }
 
         [Option('r', "recursive", Default = false,
             HelpText = "Looks for .qp in all subdirectories of given directories")]
-        public bool RecursiveSearch { get; }
+        public bool RecursiveSearch { get; set; }
 
         [Option("sampleset-normal", SetName = "SampleSet", Default = false,
             HelpText = "Use normal sampleset instead of soft")]
-        public bool NormalSampleset { get; }
+        public bool NormalSampleset { get; set; }
 
         [Option("sampleset-drum", SetName = "SampleSet", Default = false,
             HelpText = "Use drum sampleset instead of soft")]
-        public bool DrumSampleSet { get; }
+        public bool DrumSampleSet { get; set; }
 
         [Option("audio-offset", Default = -23,
             HelpText =
                 "Quaver times by waveform while osu! times by ear, so there's a difference of about 23 milliseconds. You can specify your own offset if needed.")]
-        public int AudioOffset { get; }
+        public int AudioOffset { get; set; }
 
         [Option("verbosity", SetName = "verbosity", Hidden = true, Default = 1,
             HelpText = "Show more of what's happening")]
-        public int Verbosity { get; }
+        public int Verbosity { get; set; }
 
         public string? SampleSet { get; private set; }
-
-        public Arguments()
-        {
-        }
 
         public void Validate()
         {
