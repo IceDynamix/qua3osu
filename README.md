@@ -1,12 +1,8 @@
 # qua3osu
 
-This is a rewrite of [qua2osu](https://github.com/IceDynamix/qua2osu) in C#
-instead of Python. Using [Quaver.API](https://github.com/Quaver/Quaver.API)
-makes conversion a lot easier.
+Convert Quaver .qp/.qua files to osu! .osz/.osu files
 
-## Download
-
-[Download here](https://github.com/IceDynamix/qua3osu/releases/tag/v1.0.1)
+[Download here](https://github.com/IceDynamix/qua3osu/releases/tag/latest)
 
 ## Run with Drag&Drop
 
