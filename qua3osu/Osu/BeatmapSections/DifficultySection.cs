@@ -3,21 +3,14 @@ using Quaver.API.Maps;
 
 namespace qua3osu.Osu.BeatmapSections
 {
-    public class DifficultySection : BeatmapSection
+    public class DifficultySection(Qua qua) : BeatmapSection
     {
         public double HpDrainRate = 8;
-        public double CircleSize;
+        public double CircleSize = qua.GetKeyCount();
         public double OverallDifficulty = 8;
         public double ApproachRate = 5;
         public double SliderMultiplier = 1.4;
         public double SliderTickRate = 1;
-
-        public DifficultySection(Qua qua, Arguments args)
-        {
-            CircleSize = qua.GetKeyCount();
-            OverallDifficulty = args.OverallDifficulty;
-            HpDrainRate = args.HpDrainRate;
-        }
 
         protected override string SectionTitle => "Difficulty";
 

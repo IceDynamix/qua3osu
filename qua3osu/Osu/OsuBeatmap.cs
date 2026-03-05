@@ -4,27 +4,15 @@ using Quaver.API.Maps;
 
 namespace qua3osu.Osu
 {
-    public class OsuBeatmap
+    public class OsuBeatmap(Qua qua)
     {
-        public const int QUAVER_TO_OSU_OFFSET = -23;
-        public GeneralSection GeneralSection;
-        public EditorSection EditorSection;
-        public MetadataSection MetadataSection;
-        public DifficultySection DifficultySection;
-        public EventsSection EventsSection;
-        public TimingPointsSection TimingPointsSection;
-        public HitObjectsSection HitObjectsSection;
-
-        public OsuBeatmap(Qua qua, Arguments args)
-        {
-            GeneralSection = new GeneralSection(qua, args);
-            EditorSection = new EditorSection(qua, args);
-            MetadataSection = new MetadataSection(qua, args);
-            DifficultySection = new DifficultySection(qua, args);
-            EventsSection = new EventsSection(qua, args);
-            TimingPointsSection = new TimingPointsSection(qua, args);
-            HitObjectsSection = new HitObjectsSection(qua, args);
-        }
+        public readonly GeneralSection GeneralSection = new(qua);
+        public readonly EditorSection EditorSection = new EditorSection(qua);
+        public readonly MetadataSection MetadataSection = new MetadataSection(qua);
+        public readonly DifficultySection DifficultySection = new DifficultySection(qua);
+        public readonly EventsSection EventsSection = new EventsSection(qua);
+        public readonly TimingPointsSection TimingPointsSection = new TimingPointsSection(qua);
+        public readonly HitObjectsSection HitObjectsSection = new HitObjectsSection(qua);
 
         public string SongString => $"{MetadataSection.Artist} - {MetadataSection.Title} [{MetadataSection.Version}]";
 

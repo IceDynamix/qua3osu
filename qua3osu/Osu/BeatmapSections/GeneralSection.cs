@@ -3,26 +3,19 @@ using Quaver.API.Maps;
 
 namespace qua3osu.Osu.BeatmapSections
 {
-    public class GeneralSection : BeatmapSection
+    public class GeneralSection(Qua qua) : BeatmapSection
     {
-        public string AudioFilename;
+        public string AudioFilename = qua.AudioFile;
         public int AudioLeadIn = 0;
-        public int PreviewTime = 0;
+        public int PreviewTime = qua.SongPreviewTime;
         public int Countdown = 0;
-        public string SampleSet;
+        public string SampleSet = "Soft";
         public double StackLeniency = 0.7;
         public int Mode = 3;
         public int LetterboxInBreaks = 0;
         public int SpecialStyle = 0;
         public int WidescreenStoryboard = 1;
-
-        public GeneralSection(Qua qua, Arguments args)
-        {
-            AudioFilename = qua.AudioFile;
-            PreviewTime = qua.SongPreviewTime + args.AudioOffset;
-            SampleSet = args.SampleSet;
-        }
-
+        
         protected override string SectionTitle => "General";
 
         public override string ToString()

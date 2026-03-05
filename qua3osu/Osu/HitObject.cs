@@ -10,15 +10,16 @@ namespace qua3osu.Osu
         public int Type;
         public int HitSounds = 0;
         public int EndTime = 0;
+        public bool IsLongNote => Type == 1 << 7;
 
-        public HitObject(HitObjectInfo hitObject, int keyCount, int offset)
+        public HitObject(HitObjectInfo hitObject, int keyCount)
         {
-            Time = hitObject.StartTime + offset;
+            Time = hitObject.StartTime;
             XPosition = 512 * hitObject.Lane / keyCount - 64;
             if (hitObject.IsLongNote)
             {
                 Type = 1 << 7;
-                EndTime = hitObject.EndTime + offset;
+                EndTime = hitObject.EndTime;
             }
             else
                 Type = 1 << 0;
@@ -27,7 +28,7 @@ namespace qua3osu.Osu
 
         public override string ToString()
         {
-            if (Type == 1 << 7)
+            if (IsLongNote)
                 return $"{XPosition},{YPosition},{Time},{Type},{HitSounds},{EndTime}:0:0:0:0:";
             else
                 return $"{XPosition},{YPosition},{Time},{Type},{HitSounds},0:0:0:0:";

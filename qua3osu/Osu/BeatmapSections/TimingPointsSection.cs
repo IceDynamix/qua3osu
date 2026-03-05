@@ -7,7 +7,7 @@ namespace qua3osu.Osu.BeatmapSections
     {
         public List<TimingPoint> TimingPoints;
 
-        public TimingPointsSection(Qua qua, Arguments args)
+        public TimingPointsSection(Qua qua)
         {
             if (qua.BPMDoesNotAffectScrollVelocity)
             {
@@ -17,14 +17,10 @@ namespace qua3osu.Osu.BeatmapSections
             }
 
             TimingPoints = qua.TimingPoints
-                .Select(timingPoint => new TimingPoint(timingPoint, args.Volume, args.AudioOffset))
+                .Select(timingPoint => new TimingPoint(timingPoint))
+                .Concat(qua.SliderVelocities.Select(sv => new TimingPoint(sv)))
+                .OrderBy(x => x.Time)
                 .ToList();
-
-            TimingPoints.AddRange(
-                qua.SliderVelocities.Select(sv => new TimingPoint(sv, args.Volume, args.AudioOffset))
-            );
-
-            TimingPoints = TimingPoints.OrderBy(x => x.Time).ToList();
         }
 
         protected override string SectionTitle => "TimingPoints";

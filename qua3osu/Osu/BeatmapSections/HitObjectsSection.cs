@@ -3,16 +3,11 @@ using Quaver.API.Maps;
 
 namespace qua3osu.Osu.BeatmapSections
 {
-    public class HitObjectsSection : BeatmapSection
+    public class HitObjectsSection(Qua qua) : BeatmapSection
     {
-        public List<HitObject> HitObjects;
-
-        public HitObjectsSection(Qua qua, Arguments args)
-        {
-            HitObjects = qua.HitObjects
-                .Select(hitObject => new HitObject(hitObject, qua.GetKeyCount(), args.AudioOffset))
-                .ToList();
-        }
+        public List<HitObject> HitObjects = qua.HitObjects
+            .Select(hitObject => new HitObject(hitObject, qua.GetKeyCount()))
+            .ToList();
 
         protected override string SectionTitle => "HitObjects";
 

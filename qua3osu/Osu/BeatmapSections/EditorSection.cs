@@ -3,18 +3,13 @@ using Quaver.API.Maps;
 
 namespace qua3osu.Osu.BeatmapSections
 {
-    public class EditorSection : BeatmapSection
+    public class EditorSection(Qua qua) : BeatmapSection
     {
-        public List<int> Bookmarks;
+        public List<int> Bookmarks = qua.Bookmarks.Select(b => b.StartTime).ToList();
         public double DistanceSpacing = 1.5;
         public int BeatDivisor = 4;
         public int GridSize = 4;
         public double TimelineZoom = 2.5;
-
-        public EditorSection(Qua qua, Arguments args)
-        {
-            Bookmarks = qua.Bookmarks.Select(b => b.StartTime + args.AudioOffset).ToList();
-        }
 
         protected override string SectionTitle => "Editor";
 

@@ -3,17 +3,10 @@ using Quaver.API.Maps;
 
 namespace qua3osu.Osu.BeatmapSections
 {
-    public class EventsSection : BeatmapSection
+    public class EventsSection(Qua qua) : BeatmapSection
     {
-        public string BackgroundFile;
-
-        public EventsSection(Qua qua, Arguments args)
-        {
-            BackgroundFile = qua.BackgroundFile;
-        }
-
+        public string BackgroundFile = qua.BackgroundFile;
         protected override string SectionTitle => "Events";
-
         public override string ToString()
         {
             var lines = new StringBuilder();

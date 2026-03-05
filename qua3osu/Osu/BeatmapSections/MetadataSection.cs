@@ -3,31 +3,19 @@ using Quaver.API.Maps;
 
 namespace qua3osu.Osu.BeatmapSections
 {
-    public class MetadataSection : BeatmapSection
+    public class MetadataSection(Qua qua) : BeatmapSection
     {
-        public string Title;
-        public string TitleUnicode;
-        public string Artist;
-        public string ArtistUnicode;
-        public string Creator;
-        public string Version;
-        public string Source;
-        public string Tags;
+        public string Title = qua.Title;
+        public string TitleUnicode = qua.Title;
+        public string Artist = qua.Artist;
+        public string ArtistUnicode = qua.Artist;
+        public string Creator = qua.Creator;
+        public string Version = qua.DifficultyName;
+        public string Source = qua.Source;
+        public string Tags = qua.Tags;
 
         public int BeatmapID = 0;
         public int BeatmapSetID = -1;
-
-        public MetadataSection(Qua qua, Arguments args)
-        {
-            Title = qua.Title;
-            TitleUnicode = qua.Title;
-            Artist = qua.Artist;
-            ArtistUnicode = qua.Artist;
-            Creator = args.Creator ?? qua.Creator;
-            Version = qua.DifficultyName;
-            Source = qua.Source;
-            Tags = qua.Tags;
-        }
 
         protected override string SectionTitle => "Metadata";
 
