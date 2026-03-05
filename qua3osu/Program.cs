@@ -2,9 +2,9 @@
 using qua3osu;
 
 Parser.Default.ParseArguments<Arguments>(args)
-    .WithParsed(ConvertListOfMapsets);
+    .WithParsed(Convert);
 
-void ConvertListOfMapsets(Arguments args)
+void Convert(Arguments args)
 {
     args.Validate();
 

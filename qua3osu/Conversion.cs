@@ -24,19 +24,16 @@ namespace qua3osu
                     switch (Path.GetExtension(file))
                     {
                         case ".qua":
+                            var osuPath = Path.Join(extractDir, Path.GetFileNameWithoutExtension(file) + ".osu");
+
                             var qua = Qua.Parse(file);
                             args.Print("Parsed qua", 3);
 
                             var map = new Osu.OsuBeatmap(qua, args);
                             args.Print("Converted qua to osu! map object", 3);
 
-                            File.WriteAllText(file, map.ToString());
-                            args.Print($"Written to file {file}", 3);
-
-                            var osuPath = Path.Join(extractDir, Path.GetFileNameWithoutExtension(file) + ".osu");
-                            File.Move(file, osuPath, true);
-                            args.Print($"Renamed file to {osuPath}", 3);
-
+                            File.WriteAllText(osuPath, map.ToString());
+                            args.Print($"Written to osuPath {osuPath}", 3);
                             break;
                         case ".png":
                         case ".jpg":
@@ -72,7 +69,7 @@ namespace qua3osu
                 args.Print($"Removed temporary conversion folder", 3);
             }
         }
-        
+
         public static void ConvertMapFile(string filePath, Arguments args)
         {
             if (!File.Exists(filePath) || Path.GetExtension(filePath) != ".qua")
@@ -81,8 +78,7 @@ namespace qua3osu
             }
 
             var outputDir = args.Output ?? Path.GetDirectoryName(filePath);
-            var folderName = Path.GetFileNameWithoutExtension(filePath);
-            var extractDir = Path.Join(outputDir, folderName);
+            var osuPath = Path.Join(outputDir, Path.GetFileNameWithoutExtension(filePath) + ".osu");
 
             var qua = Qua.Parse(filePath);
             args.Print("Parsed qua", 3);
@@ -90,12 +86,8 @@ namespace qua3osu
             var map = new Osu.OsuBeatmap(qua, args);
             args.Print("Converted qua to osu! map object", 3);
 
-            File.WriteAllText(filePath, map.ToString());
-            args.Print($"Written to filePath {filePath}", 3);
-
-            var osuPath = Path.Join(extractDir, Path.GetFileNameWithoutExtension(filePath) + ".osu");
-            File.Move(filePath, osuPath, true);
-            args.Print($"Renamed filePath to {osuPath}", 3);
+            File.WriteAllText(osuPath, map.ToString());
+            args.Print($"Written to path {osuPath}", 3);
         }
     }
 }
