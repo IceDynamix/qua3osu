@@ -4,16 +4,20 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
+        <PublishSingleFile>true</PublishSingleFile>
+        <SelfContained>true</SelfContained>
+        <PublishTrimmed>true</PublishTrimmed>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Quaver.API\Quaver.API\Quaver.API.csproj" />
+        <ProjectReference Include="..\Quaver.API\Quaver.API\Quaver.API.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="CommandLineParser" Version="2.9.1" />
-        <PackageReference Include="Microsoft.NET.ILLink.Tasks" Version="10.0.3" />
-        <PackageReference Include="Microsoft.Packaging.Tools.Trimming" Version="1.1.0-preview1-26619-01" />
+        <PackageReference Include="CommandLineParser" Version="2.9.1"/>
+        <PackageReference Include="Microsoft.NET.ILLink.Tasks" Version="10.0.3"/>
+        <PackageReference Include="Microsoft.Packaging.Tools.Trimming" Version="1.1.0-preview1-26619-01"/>
     </ItemGroup>
 
 </Project>

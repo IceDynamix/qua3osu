@@ -1,55 +1,54 @@
 ﻿using CommandLine;
+using qua3osu;
 
-namespace qua3osu
+Parser.Default.ParseArguments<Arguments>(args)
+    .WithParsed(ConvertListOfMapsets);
+
+void ConvertListOfMapsets(Arguments args)
 {
-    class Program
+    args.Validate();
+
+    args.Print(args.ToString(), 3);
+
+    var listOfFiles = new List<string>();
+    foreach (var inputPath in args.Paths)
     {
-        static void Main(string[] args)
+        if (Directory.Exists(inputPath))
         {
-            var arguments = Parser.Default.ParseArguments<Arguments>(args)
-                .WithParsed(arguments => ConvertListOfMapsets(arguments));
+            listOfFiles.AddRange(Directory.GetFiles(inputPath).Where(CanConvert));
         }
-
-        static void ConvertListOfMapsets(Arguments args)
+        else if (File.Exists(inputPath) && CanConvert(inputPath))
         {
-            args.Validate();
+            listOfFiles.Add(inputPath);
+        }
+    }
 
-            args.Print(args.ToString(), 3);
+    if (listOfFiles.Count == 0)
+        args.Print("No files found");
+    else
+        args.Print($"Found {listOfFiles.Count} maps or mapsets to convert", 2);
 
-            var listOfQpFiles = new List<string>();
-            foreach (var inputPath in args.Paths)
+    foreach (var path in listOfFiles)
+    {
+        args.Print($"Converting {path}", 2);
+        try
+        {
+            if (Path.GetExtension(path) == ".qp")
             {
-                if (Directory.Exists(inputPath))
-                {
-                    listOfQpFiles.AddRange(
-                        Directory.GetFiles(inputPath)
-                            .Where(file => Path.GetExtension(file) == ".qp")
-                    );
-                }
-                else if (File.Exists(inputPath) && Path.GetExtension(inputPath) == ".qp")
-                {
-                    listOfQpFiles.Add(inputPath);
-                }
+                Conversion.ConvertMapset(path, args);
+                Console.WriteLine($"Finished converting mapset {path}", 2);
             }
-
-            if (listOfQpFiles.Count == 0)
-                args.Print("No files found");
             else
-                args.Print($"Found {listOfQpFiles.Count} mapsets to convert", 2);
-
-            foreach (var mapsetPath in listOfQpFiles)
             {
-                args.Print($"Converting {mapsetPath}", 2);
-                try
-                {
-                    Conversion.ConvertMapset(mapsetPath, args);
-                    Console.WriteLine($"Finished converting mapset {mapsetPath}", 2);
-                }
-                catch (Exception e)
-                {
-                    args.Print($"Could not convert mapset {mapsetPath}, {e.Message}");
-                }
+                Conversion.ConvertMapFile(path, args);
+                Console.WriteLine($"Finished converting map {path}", 2);
             }
+        }
+        catch (Exception e)
+        {
+            args.Print($"Could not convert map or mapset {path}, {e.Message}");
         }
     }
 }
+
+bool CanConvert(string path) => Path.GetExtension(path) == ".qp" || Path.GetExtension(path) == ".qua";

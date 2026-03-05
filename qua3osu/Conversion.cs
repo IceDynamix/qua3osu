@@ -72,5 +72,30 @@ namespace qua3osu
                 args.Print($"Removed temporary conversion folder", 3);
             }
         }
+        
+        public static void ConvertMapFile(string filePath, Arguments args)
+        {
+            if (!File.Exists(filePath) || Path.GetExtension(filePath) != ".qua")
+            {
+                throw new ArgumentException("Invalid file");
+            }
+
+            var outputDir = args.Output ?? Path.GetDirectoryName(filePath);
+            var folderName = Path.GetFileNameWithoutExtension(filePath);
+            var extractDir = Path.Join(outputDir, folderName);
+
+            var qua = Qua.Parse(filePath);
+            args.Print("Parsed qua", 3);
+
+            var map = new Osu.OsuBeatmap(qua, args);
+            args.Print("Converted qua to osu! map object", 3);
+
+            File.WriteAllText(filePath, map.ToString());
+            args.Print($"Written to filePath {filePath}", 3);
+
+            var osuPath = Path.Join(extractDir, Path.GetFileNameWithoutExtension(filePath) + ".osu");
+            File.Move(filePath, osuPath, true);
+            args.Print($"Renamed filePath to {osuPath}", 3);
+        }
     }
 }

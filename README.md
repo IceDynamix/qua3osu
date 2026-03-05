@@ -52,3 +52,18 @@ Example commands:
 
 Regular conversion of a mapset file called my-mapset.qp: `<path>/qua3osu.exe my-mapset.qp`
 With OD 8 and the creator name changed to IceDynamix: `<path>/qua3osu.exe my-mapset.qp --od 8 --creator IceDynamix`
+
+## Build yourself
+
+```bash
+git clone https://github.com/IceDynamix/qua3osu --recurse-submodules
+cd qua3osu
+dotnet run -- <args>
+```
+
+Make releases. Output will be in ./bin/Release/<runtime>/<platform>/publish
+
+```
+dotnet publish -r win-x64
+dotnet publish -r linux-x64
+```
