@@ -92,7 +92,9 @@ public class ConvertCommand : RootCommand
         Options.Add(SampleSet);
 
         Options.Add(Offset);
-        
+
         Options.Add(Verbosity);
+
+        Description = "Convert Quaver .qp/.qua files to osu! .osz/.osu files";
     }
 }
