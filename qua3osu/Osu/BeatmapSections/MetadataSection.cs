@@ -23,7 +23,7 @@ namespace qua3osu.Osu.BeatmapSections
             TitleUnicode = qua.Title;
             Artist = qua.Artist;
             ArtistUnicode = qua.Artist;
-            Creator = qua.Creator;
+            Creator = args.Creator != "" ? args.Creator : qua.Creator;
             Version = qua.DifficultyName;
             Source = qua.Source;
             Tags = qua.Tags;

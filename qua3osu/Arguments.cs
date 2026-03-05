@@ -8,10 +8,10 @@ namespace qua3osu
     {
         [Value(0, MetaName = "input-paths", Required = true,
             HelpText = "Path(s) to directories containing .qp files or direct .qp file path(s)")]
-        public IEnumerable<string> Paths { get; set; }
+        public IEnumerable<string> Paths { get; }
 
         [Option('o', "output", HelpText = "Specifies the output directory, uses original directory of .qp by default")]
-        public string Output { get; set; }
+        public string? Output { get; }
 
         [Option("od", Default = 8, HelpText = "Overall difficulty as a number between 0 and 10")]
         public double OverallDifficulty { get; set; }
@@ -23,7 +23,7 @@ namespace qua3osu
         public int Volume { get; set; }
 
         [Option('c', "creator", HelpText = "Changes the creator username for all maps")]
-        public string Creator { get; set; }
+        public string? Creator { get; set; }
 
         [Option('r', "recursive", Default = false,
             HelpText = "Looks for .qp in all subdirectories of given directories")]
@@ -46,7 +46,7 @@ namespace qua3osu
             HelpText = "Show more of what's happening")]
         public int Verbosity { get; set; }
 
-        public string SampleSet { get; set; }
+        public string? SampleSet { get; set; }
 
         public void Validate()
         {

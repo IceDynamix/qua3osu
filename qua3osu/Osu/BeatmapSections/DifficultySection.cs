@@ -15,6 +15,8 @@ namespace qua3osu.Osu.BeatmapSections
         public DifficultySection(Qua qua, Arguments args)
         {
             CircleSize = qua.GetKeyCount();
+            OverallDifficulty = args.OverallDifficulty;
+            HpDrainRate = args.HpDrainRate;
         }
 
         protected override string SectionTitle { get; } = "Difficulty";
