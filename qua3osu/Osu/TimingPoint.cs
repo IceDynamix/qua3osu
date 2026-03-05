@@ -13,9 +13,8 @@ namespace qua3osu.Osu
         public int Uninherited = 0;
         public int Kiai = 0;
 
-        public TimingPoint(TimingPointInfo timingPoint, int volume, bool dontUseOffset)
+        public TimingPoint(TimingPointInfo timingPoint, int volume, int offset)
         {
-            var offset = dontUseOffset ? 0 : OsuBeatmap.QUAVER_TO_OSU_OFFSET;
             Time = (int)Math.Round(timingPoint.StartTime) + offset;
             Uninherited = 1;
             // osu! can't handle 0 BPM, so it's replaced with a very low BPM value instead (0.000006 BPM).
@@ -23,9 +22,8 @@ namespace qua3osu.Osu
             Volume = volume;
         }
 
-        public TimingPoint(SliderVelocityInfo scrollVelocity, int volume, bool dontUseOffset)
+        public TimingPoint(SliderVelocityInfo scrollVelocity, int volume, int offset)
         {
-            var offset = dontUseOffset ? 0 : OsuBeatmap.QUAVER_TO_OSU_OFFSET;
             Time = (int)Math.Round(scrollVelocity.StartTime) + offset;
             Uninherited = 0;
             Meter = 0;

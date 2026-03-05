@@ -19,11 +19,11 @@ namespace qua3osu.Osu.BeatmapSections
         public GeneralSection(Qua qua, Arguments args)
         {
             AudioFilename = qua.AudioFile;
-            PreviewTime = qua.SongPreviewTime + (args.DontApplyOffset ? 0 : OsuBeatmap.QUAVER_TO_OSU_OFFSET);
+            PreviewTime = qua.SongPreviewTime + args.AudioOffset;
             SampleSet = args.SampleSet;
         }
 
-        protected override string SectionTitle { get; } = "General";
+        protected override string SectionTitle => "General";
 
         public override string ToString()
         {

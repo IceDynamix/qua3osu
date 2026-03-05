@@ -15,13 +15,13 @@ namespace qua3osu.Osu.BeatmapSections
                 qua.SortSliderVelocities();
                 qua.DenormalizeSVs();
             }
-            
+
             TimingPoints = qua.TimingPoints
-                .Select(timingPoint => new TimingPoint(timingPoint, args.Volume, args.DontApplyOffset))
+                .Select(timingPoint => new TimingPoint(timingPoint, args.Volume, args.AudioOffset))
                 .ToList();
 
             TimingPoints.AddRange(
-                qua.SliderVelocities.Select(sv => new TimingPoint(sv, args.Volume, args.DontApplyOffset))
+                qua.SliderVelocities.Select(sv => new TimingPoint(sv, args.Volume, args.AudioOffset))
             );
 
             TimingPoints = TimingPoints.OrderBy(x => x.Time).ToList();

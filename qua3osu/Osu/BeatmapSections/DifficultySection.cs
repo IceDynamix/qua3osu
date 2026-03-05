@@ -19,7 +19,7 @@ namespace qua3osu.Osu.BeatmapSections
             HpDrainRate = args.HpDrainRate;
         }
 
-        protected override string SectionTitle { get; } = "Difficulty";
+        protected override string SectionTitle => "Difficulty";
 
         public override string ToString()
         {

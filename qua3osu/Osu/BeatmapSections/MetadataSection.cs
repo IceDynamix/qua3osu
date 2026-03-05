@@ -23,13 +23,13 @@ namespace qua3osu.Osu.BeatmapSections
             TitleUnicode = qua.Title;
             Artist = qua.Artist;
             ArtistUnicode = qua.Artist;
-            Creator = args.Creator != "" ? args.Creator : qua.Creator;
+            Creator = args.Creator ?? qua.Creator;
             Version = qua.DifficultyName;
             Source = qua.Source;
             Tags = qua.Tags;
         }
 
-        protected override string SectionTitle { get; } = "Metadata";
+        protected override string SectionTitle => "Metadata";
 
         public override string ToString()
         {

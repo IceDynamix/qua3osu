@@ -10,11 +10,11 @@ namespace qua3osu.Osu.BeatmapSections
         public HitObjectsSection(Qua qua, Arguments args)
         {
             HitObjects = qua.HitObjects
-                .Select(hitObject => new HitObject(hitObject, qua.GetKeyCount(), args.DontApplyOffset))
+                .Select(hitObject => new HitObject(hitObject, qua.GetKeyCount(), args.AudioOffset))
                 .ToList();
         }
 
-        protected override string SectionTitle { get; } = "HitObjects";
+        protected override string SectionTitle => "HitObjects";
 
         public override string ToString()
         {

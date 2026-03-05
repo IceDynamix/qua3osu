@@ -13,11 +13,10 @@ namespace qua3osu.Osu.BeatmapSections
 
         public EditorSection(Qua qua, Arguments args)
         {
-            var offset = args.DontApplyOffset ? 0 : OsuBeatmap.QUAVER_TO_OSU_OFFSET;
-            Bookmarks = qua.Bookmarks.Select(b => b.StartTime + offset).ToList();
+            Bookmarks = qua.Bookmarks.Select(b => b.StartTime + args.AudioOffset).ToList();
         }
 
-        protected override string SectionTitle { get; } = "Editor";
+        protected override string SectionTitle => "Editor";
 
         public override string ToString()
         {
