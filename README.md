@@ -2,7 +2,7 @@
 
 Convert Quaver .qp/.qua files to osu! .osz/.osu files
 
-[Download here](https://github.com/IceDynamix/qua3osu/releases/tag/latest)
+[Download here](https://github.com/IceDynamix/qua3osu/releases/latest)
 
 ## Run with Drag&Drop
 
