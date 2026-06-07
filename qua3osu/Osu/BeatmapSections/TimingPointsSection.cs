@@ -84,7 +84,7 @@ namespace qua3osu.Osu.BeatmapSections
 
                 if (!hasOutputTimingPoint || !NearlyEqual(currentOutputBpm, targetBpm))
                 {
-                    output.Add(TimingPoint.TimingChange(time, targetBpm));
+                    output.Add(TimingPoint.TimingChange(time, targetBpm, true));
                     currentOutputBpm = targetBpm;
                     hasOutputTimingPoint = true;
                 }

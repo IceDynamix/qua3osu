@@ -11,7 +11,10 @@ namespace qua3osu.Osu
         public int SampleIndex = 0;
         public int Volume = 20;
         public int Uninherited = 0;
-        public int Kiai = 0;
+        public int BitFlag = 0;
+
+        public const int Kiai = 1;
+        public const int OmitFirstBarline = 8;
 
         private TimingPoint()
         {
@@ -31,11 +34,15 @@ namespace qua3osu.Osu
             SetSliderVelocity(scrollVelocity.StartTime, scrollVelocity.Multiplier);
         }
 
-        public static TimingPoint TimingChange(float time, double bpm)
+        public static TimingPoint TimingChange(float time, double bpm, bool omitFirstBarline)
         {
             var timingPoint = new TimingPoint { Time = time, Uninherited = 1 };
             // osu! can't handle 0 BPM, so it's replaced with a very low BPM value instead (0.000006 BPM).
             timingPoint.BeatLength = bpm <= 0 ? 10e10 : 60000 / bpm;
+            if (omitFirstBarline)
+            {
+                timingPoint.BitFlag = OmitFirstBarline;
+            }
             return timingPoint;
         }
 
@@ -56,6 +63,6 @@ namespace qua3osu.Osu
         }
 
         public override string ToString() =>
-            $"{Time},{BeatLength},{Meter},{SampleSet},{SampleIndex},{Volume},{Uninherited},{Kiai}";
+            $"{Time},{BeatLength},{Meter},{SampleSet},{SampleIndex},{Volume},{Uninherited},{BitFlag}";
     }
 }
