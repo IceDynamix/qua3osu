@@ -4,7 +4,7 @@ namespace qua3osu.Osu
 {
     public class TimingPoint
     {
-        public int Time = 0;
+        public float Time = 0;
         public double BeatLength = 0;
         public int Meter = 4;
         public int SampleSet = 0;
@@ -15,7 +15,7 @@ namespace qua3osu.Osu
 
         public TimingPoint(TimingPointInfo timingPoint)
         {
-            Time = (int)Math.Round(timingPoint.StartTime);
+            Time = timingPoint.StartTime;
             Uninherited = 1;
             // osu! can't handle 0 BPM, so it's replaced with a very low BPM value instead (0.000006 BPM).
             BeatLength = timingPoint.Bpm <= 0 ? 10e10 : timingPoint.MillisecondsPerBeat;
@@ -23,7 +23,7 @@ namespace qua3osu.Osu
 
         public TimingPoint(SliderVelocityInfo scrollVelocity)
         {
-            Time = (int)Math.Round(scrollVelocity.StartTime);
+            Time = scrollVelocity.StartTime;
             Uninherited = 0;
             Meter = 0;
             // osu! can't handle 0x SV, so it's replaced with a very low value instead (0.00000001x)
