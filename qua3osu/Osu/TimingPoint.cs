@@ -4,18 +4,26 @@ namespace qua3osu.Osu
 {
     public class TimingPoint
     {
-        public int Time = 0;
+        public float Time = 0;
         public double BeatLength = 0;
         public int Meter = 4;
         public int SampleSet = 0;
         public int SampleIndex = 0;
         public int Volume = 20;
         public int Uninherited = 0;
-        public int Kiai = 0;
+        public int BitFlag = 0;
+
+        public const int Kiai = 1;
+        public const int OmitFirstBarline = 8;
+
+        private TimingPoint()
+        {
+            
+        }
 
         public TimingPoint(TimingPointInfo timingPoint)
         {
-            Time = (int)Math.Round(timingPoint.StartTime);
+            Time = timingPoint.StartTime;
             Uninherited = 1;
             // osu! can't handle 0 BPM, so it's replaced with a very low BPM value instead (0.000006 BPM).
             BeatLength = timingPoint.Bpm <= 0 ? 10e10 : timingPoint.MillisecondsPerBeat;
@@ -23,16 +31,38 @@ namespace qua3osu.Osu
 
         public TimingPoint(SliderVelocityInfo scrollVelocity)
         {
-            Time = (int)Math.Round(scrollVelocity.StartTime);
+            SetSliderVelocity(scrollVelocity.StartTime, scrollVelocity.Multiplier);
+        }
+
+        public static TimingPoint TimingChange(float time, double bpm, bool omitFirstBarline)
+        {
+            var timingPoint = new TimingPoint { Time = time, Uninherited = 1 };
+            // osu! can't handle 0 BPM, so it's replaced with a very low BPM value instead (0.000006 BPM).
+            timingPoint.BeatLength = bpm <= 0 ? 10e10 : 60000 / bpm;
+            if (omitFirstBarline)
+            {
+                timingPoint.BitFlag = OmitFirstBarline;
+            }
+            return timingPoint;
+        }
+
+        public static TimingPoint SliderVelocity(float time, double multiplier)
+        {
+            var timingPoint = new TimingPoint();
+            timingPoint.SetSliderVelocity(time, multiplier);
+            return timingPoint;
+        }
+
+        private void SetSliderVelocity(float time, double multiplier)
+        {
+            Time = time;
             Uninherited = 0;
             Meter = 0;
-            // osu! can't handle 0x SV, so it's replaced with a very low value instead (0.00000001x)
-            // It clamps all SV values between 0.01x and 10x, so putting -10e10 instead of -10e4 doesn't really
-            // make a difference. It could change with Lazer though, so it's kept in.
-            BeatLength = scrollVelocity.Multiplier <= 0 ? -10e10 : -100 / scrollVelocity.Multiplier;
+            // osu! clamps inherited timing point multipliers between 0.01x and 10x.
+            BeatLength = multiplier <= 0 ? -10000 : -100 / multiplier;
         }
 
         public override string ToString() =>
-            $"{Time},{BeatLength},{Meter},{SampleSet},{SampleIndex},{Volume},{Uninherited},{Kiai}";
+            $"{Time},{BeatLength},{Meter},{SampleSet},{SampleIndex},{Volume},{Uninherited},{BitFlag}";
     }
 }
